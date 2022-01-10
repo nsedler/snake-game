@@ -11,7 +11,8 @@ class Snake(pygame.sprite.Sprite):
 
     def draw(self, win):
         for coord in self.snake_pieces:
-            pygame.draw.rect(win, (227, 62, 51), coord)
+            pygame.draw.rect(win, (244, 162, 97), coord)
+            pygame.draw.rect(win, (244, 162, 97), coord, 1)
 
     # Calculates the next snake piece position and creates a rect from it
     def next_snake_piece(self):

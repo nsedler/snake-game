@@ -21,7 +21,7 @@ class GameWindow(object):
         self.score = 0
 
     def draw(self):
-        self.game_window.fill((0, 8, 5))
+        self.game_window.fill((38, 70, 83))
 
         if self.player.direction != "":  # Make sure the snake should be moving
             self.player.move_snake()\
@@ -60,6 +60,7 @@ class GameWindow(object):
 
                 if event.type == pygame.QUIT:
                     self.running = False
+                    pygame.quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.running = False
