@@ -1,12 +1,14 @@
 import pygame
 import random
 
+
 class Apple(object):
     def __init__(self):
-        self.apple = [] # Empty array of apples (should only ever contain 1 apple)
-
+        # Empty array of apples (should only ever contain 1 apple)
+        self.apple = []
 
     # Creates an apple at a random location
+
     def create_apple(self):
 
         # Get the random coords for the apple
@@ -14,7 +16,7 @@ class Apple(object):
         random_y = random.randrange(0, 350, 10)
 
         self.apple.append(pygame.rect.Rect(random_x, random_y, 10, 10))
-        self.rect = self.apple[-1] # Sets self.rect to the current apple
+        self.rect = self.apple[-1]  # Sets self.rect to the current apple
 
     # Deletes the current apple
     def delete_apple(self):

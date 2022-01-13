@@ -1,5 +1,6 @@
 import pygame
 
+
 class Snake(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -81,7 +82,7 @@ class Snake(pygame.sprite.Sprite):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
 
-                if self.direction != "RIGHT": 
+                if self.direction != "RIGHT":
                     print("LEFT DOWN")
                     self.direction = "LEFT"
             elif event.key == pygame.K_RIGHT:

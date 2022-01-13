@@ -1,4 +1,5 @@
-import pygame, start_screen
+import pygame
+import start_screen
 import snake
 import apple
 
@@ -7,7 +8,7 @@ class GameWindow(object):
     def __init__(self, width, height, title):
 
         pygame.font.init()
-         
+
         self.font = pygame.font.SysFont("Comic Sans MS", 22)
 
         self.game_window = pygame.display.set_mode((width, height))
@@ -21,7 +22,7 @@ class GameWindow(object):
         self.score = 0
 
     def quit_game(self):
-        start = start_screen.StartScreen()
+        start = start_screen.StartScreen(self.score)
         start.game_loop()
         self.running = False
 
@@ -41,14 +42,13 @@ class GameWindow(object):
             self.score += 1
 
         # Collision check for the snake touching itself
-        if self.player.check_collision(): 
-            self.score = "Game Over!"
+        if self.player.check_collision():
             self.quit_game()
 
         # Show the current score at the top middle of the screen
         score_surface = self.font.render(
             str(self.score), False, (248, 240, 227))
- 
+
         # Draw the food and player
         self.food.draw(self.game_window)
         self.player.draw(self.game_window)
@@ -57,9 +57,9 @@ class GameWindow(object):
         pygame.display.update()
 
     def game_loop(self):
-        self.food.create_apple() # Create the first apple 
+        self.food.create_apple()  # Create the first apple
         while self.running:
-            self.clock.tick(15) # 15 FPS
+            self.clock.tick(15)  # 15 FPS
 
             for event in pygame.event.get():
                 self.player.on_event(event)
