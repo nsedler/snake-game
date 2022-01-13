@@ -26,6 +26,11 @@ class GameWindow(object):
         start.game_loop()
         self.running = False
 
+    def reset_game(self):
+        self.score = 0
+        self.player.reset_snake()
+
+
     def draw(self):
         self.game_window.fill((38, 70, 83))
 
@@ -70,5 +75,7 @@ class GameWindow(object):
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.running = False
+                    if event.key == pygame.K_r:
+                        self.reset_game()
 
             self.draw()

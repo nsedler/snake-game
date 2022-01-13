@@ -53,6 +53,11 @@ class Snake(pygame.sprite.Sprite):
         new_head = self.next_snake_piece()
         self.snake_pieces.append(new_head)
 
+    def reset_snake(self):
+        self.snake_pieces = [pygame.rect.Rect(150, 150, 10, 10), pygame.rect.Rect(
+            160, 150, 10, 10), pygame.rect.Rect(170, 150, 10, 10)]
+        self.direction = ""
+
     # Collision check for the snake colliding with itself or the wall
     def check_collision(self):
         head = self.snake_pieces[-1]
