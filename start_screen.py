@@ -37,6 +37,7 @@ class StartScreen(object):
                         elif event.ui_element == self.play_button:
                             game_window = game.GameWindow(350, 350, "Snake")
                             game_window.game_loop()
+                            self.running = False
                             
 
             self.manager.update(time_delta)

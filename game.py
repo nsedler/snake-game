@@ -1,4 +1,4 @@
-import pygame
+import pygame, start_screen
 import snake
 import apple
 
@@ -20,6 +20,11 @@ class GameWindow(object):
         self.running = True
         self.score = 0
 
+    def quit_game(self):
+        start = start_screen.StartScreen()
+        start.game_loop()
+        self.running = False
+
     def draw(self):
         self.game_window.fill((38, 70, 83))
 
@@ -38,6 +43,7 @@ class GameWindow(object):
         # Collision check for the snake touching itself
         if self.player.check_collision(): 
             self.score = "Game Over!"
+            self.quit_game()
 
         # Show the current score at the top middle of the screen
         score_surface = self.font.render(
