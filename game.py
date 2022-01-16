@@ -2,6 +2,7 @@ import pygame
 import start_screen
 import snake
 import apple
+import snekdb
 
 
 class GameWindow(object):
@@ -21,7 +22,15 @@ class GameWindow(object):
         self.running = True
         self.score = 0
 
+        self.db = snekdb.SnekDB()
+
     def quit_game(self):
+
+        insert_statement = f"INSERT INTO sys.test_table (random_string) VALUES (\"{self.score}\")"
+        self.db.cursor.execute(insert_statement)
+        self.db.cnx.commit()
+        self.db.close_db()
+
         start = start_screen.StartScreen(self.score)
         start.game_loop()
         self.running = False
@@ -29,7 +38,6 @@ class GameWindow(object):
     def reset_game(self):
         self.score = 0
         self.player.reset_snake()
-
 
     def draw(self):
         self.game_window.fill((38, 70, 83))
