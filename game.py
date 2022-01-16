@@ -43,7 +43,7 @@ class GameWindow(object):
         self.game_window.fill((38, 70, 83))
 
         if self.player.direction != "":  # Make sure the snake should be moving
-            self.player.move_snake()\
+            self.player.move_snake()
 
         # Collisions for checking if the player collides with the apple
         # if the snake head did collide then delete the apple, grow the snake, create a new apple and add 1 to the total score
@@ -53,20 +53,15 @@ class GameWindow(object):
             self.food.create_apple()
 
             self.score += 1
+            pygame.display.set_caption(f"Snek | Score: {self.score}")
 
         # Collision check for the snake touching itself
         if self.player.check_collision():
             self.quit_game()
 
-        # Show the current score at the top middle of the screen
-        score_surface = self.font.render(
-            str(self.score), False, (248, 240, 227))
-
         # Draw the food and player
         self.food.draw(self.game_window)
         self.player.draw(self.game_window)
-
-        self.game_window.blit(score_surface, (170, 20))
         pygame.display.update()
 
     def game_loop(self):
