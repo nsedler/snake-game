@@ -1,5 +1,5 @@
 {
-    "#test_button, #exit_button": {
+    "#test_button, #exit_button, #submit_button": {
         "colours": {
             "normal_bg":"#FFFFFF"
         },

@@ -1,5 +1,8 @@
 import start_screen
 
+WIDTH = 350
+HEIGHT = 350
+
 if __name__ == "__main__":
-    screen = start_screen.StartScreen(0)
+    screen = start_screen.StartScreen(WIDTH, HEIGHT, 0)
     screen.game_loop()

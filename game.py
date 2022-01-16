@@ -1,5 +1,5 @@
 import pygame
-import start_screen
+import game_over
 import snake
 import apple
 import snekdb
@@ -9,6 +9,9 @@ class GameWindow(object):
     def __init__(self, width, height, title):
 
         pygame.font.init()
+
+        self.width = width
+        self.height = height
 
         self.font = pygame.font.SysFont("Comic Sans MS", 22)
 
@@ -26,13 +29,8 @@ class GameWindow(object):
 
     def quit_game(self):
 
-        insert_statement = f"INSERT INTO sys.test_table (random_string) VALUES (\"{self.score}\")"
-        self.db.cursor.execute(insert_statement)
-        self.db.cnx.commit()
-        self.db.close_db()
-
-        start = start_screen.StartScreen(self.score)
-        start.game_loop()
+        over_screen = game_over.GameOver(self.width, self.height, self.score)
+        over_screen.game_loop()
         self.running = False
 
     def reset_game(self):
