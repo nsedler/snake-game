@@ -57,6 +57,7 @@ class GameOver(object):
 
                             game_window = game.GameWindow(self.width, self.height, "Snek")
                             game_window.game_loop()
+                            self.running = False
 
             self.manager.update(time_delta)
             self.draw()
