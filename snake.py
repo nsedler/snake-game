@@ -16,7 +16,7 @@ class Snake(pygame.sprite.Sprite):
             pygame.draw.rect(win, (244, 162, 97), coord, 1)
 
     # Calculates the next snake piece position and creates a rect from it
-    def next_snake_piece(self):
+    def next_snake_head(self):
         next_coord = (0, 0)
         # check which is the current direction and adjust the axis accordingly
         if self.direction == "DOWN":
@@ -38,20 +38,38 @@ class Snake(pygame.sprite.Sprite):
 
     # Moves the snake in the current direction
     # pop tail and add new head to give appearance of movement
-
     def move_snake(self):
-        new_head = self.next_snake_piece()
+        new_head = self.next_snake_head()
 
         self.rect = new_head
 
         self.snake_pieces.pop(0)
         self.snake_pieces.append(new_head)
 
+    def next_snake_growth_piece(self):
+        next_coord = (0, 0)
+        # check which is the current direction and adjust the axis accordingly
+        if self.direction == "DOWN":
+            next_coord = (self.snake_pieces[0].x,
+                          self.snake_pieces[0].y - 10)
+        elif self.direction == "UP":
+            next_coord = (self.snake_pieces[0].x,
+                          self.snake_pieces[0].y + 10)
+        elif self.direction == "RIGHT":
+            next_coord = (
+                self.snake_pieces[0].x - 10, self.snake_pieces[0].y)
+        elif self.direction == "LEFT":
+            next_coord = (
+                self.snake_pieces[0].x + 10, self.snake_pieces[0].y)
+
+        # create and return the new piece
+        new_piece = pygame.rect.Rect(next_coord[0], next_coord[1], 10, 10)
+        return new_piece
+
     # Adds a piece to the snake
     def snake_grow(self):
-
-        new_head = self.next_snake_piece()
-        self.snake_pieces.append(new_head)
+        
+        self.snake_pieces.insert(0, self.next_snake_growth_piece())
 
     def reset_snake(self):
         self.snake_pieces = [pygame.rect.Rect(150, 150, 10, 10), pygame.rect.Rect(
