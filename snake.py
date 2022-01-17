@@ -88,24 +88,20 @@ class Snake(pygame.sprite.Sprite):
             if event.key == pygame.K_LEFT:
 
                 if self.direction != "RIGHT":
-                    print("LEFT DOWN")
                     self.direction = "LEFT"
             elif event.key == pygame.K_RIGHT:
 
                 if self.direction != "LEFT":
-                    print("RIGHT DOWN")
                     self.direction = "RIGHT"
 
             elif event.key == pygame.K_UP:
 
                 if self.direction != "DOWN":
-                    print("UP DOWN")
                     self.direction = "UP"
 
             elif event.key == pygame.K_DOWN:
 
                 if self.direction != "UP":
-                    print("DOWN DOWN")
                     self.direction = "DOWN"
 
             elif event.key == pygame.K_SPACE:
