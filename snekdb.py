@@ -1,12 +1,14 @@
-import mysql.connector
 import os
+import pprint
+from array import array
 
+import mysql.connector
 from dotenv import load_dotenv
 
 
 class SnekDB(object):
     def __init__(self):
-        
+
         load_dotenv()
 
         db_user = os.getenv('DB_USER')
@@ -21,3 +23,22 @@ class SnekDB(object):
     def close_db(self):
         self.cursor.close()
         self.cnx.close()
+
+    def get_scoreboard(self):
+        select_query = "select * from Scores order by Score desc"
+        self.cursor.execute(select_query)
+        data = self.cursor.fetchall()
+
+        leaderboard_split = [data[i:i + 5] for i in range(0, len(data), 5)]
+        leaderboard_book = []
+
+        for i in range(0, len(leaderboard_split)):
+            new_page = {i + 1: leaderboard_split[i]}
+            leaderboard_book.append(new_page)
+
+        print(leaderboard_book[0][1])
+
+        self.cnx.commit()
+        self.close_db()
+
+        return leaderboard_book
