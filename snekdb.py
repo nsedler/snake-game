@@ -35,8 +35,13 @@ class SnekDB(object):
         for i in range(0, len(leaderboard_split)):
             new_page = {i + 1: leaderboard_split[i]}
             leaderboard_book.append(new_page)
+        # pp = pprint.PrettyPrinter(depth=4)
+        # pp.pprint(leaderboard_book[1])
 
-        print(leaderboard_book[0][1])
+        # cur_book_page = leaderboard_book[1][2]
+        # for scoreid, score, name in cur_book_page:
+        #     print(f'{score}___{name}')
+        #     print("______________")
 
         self.cnx.commit()
         self.close_db()
