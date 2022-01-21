@@ -2,6 +2,7 @@ import pygame
 import pygame_gui
 
 import snekdb
+import start_screen
 
 
 class Leaderboard(object):
@@ -27,6 +28,9 @@ class Leaderboard(object):
         self.next_page_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
             (250, 270), (75, 25)), text=">>>", manager=self.manager, object_id="#next_page")
 
+        self.back_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
+            (25, 310), (75, 25)), text="Back", manager=self.manager, object_id="#back_button")
+
         self.running = True
 
         self.leaderboard_book = self.db.get_scoreboard()
@@ -49,7 +53,7 @@ class Leaderboard(object):
         score_text = self.get_current_page(self.leaderboard_page)
         score_board = pygame_gui.elements.UITextBox(
             score_text,
-            pygame.Rect(10, 10, 300, 150),
+            pygame.Rect(10, 10, 340, 150),
             manager=self.manager,
             object_id="#scoreboard"
         )
@@ -79,7 +83,10 @@ class Leaderboard(object):
                         elif event.ui_element == self.prev_page_button:
                             if self.leaderboard_page > 1:
                                 self.leaderboard_page -= 1
-
+                        elif event.ui_element == self.back_button:
+                            screen = start_screen.StartScreen(350, 350)
+                            screen.game_loop()
+                            self.running = False
             self.manager.update(time_delta)
             self.draw()
             self.manager.draw_ui(self.start_window)
