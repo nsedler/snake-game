@@ -22,11 +22,18 @@ class Leaderboard(object):
         self.start_window = pygame.display.set_mode((width, height))
         self.clock = pygame.time.Clock()
 
+        self.prev_page_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
+            (25, 270), (75, 25)), text="<<<", manager=self.manager, object_id="#prev_page")
+        self.next_page_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
+            (250, 270), (75, 25)), text=">>>", manager=self.manager, object_id="#next_page")
+
         self.running = True
+
+        self.leaderboard_book = self.db.get_scoreboard()
+        self.leaderboard_page = 1
 
     def draw(self):
         self.start_window.fill((0, 0, 0))
-        leaderboard_book = self.db.get_scoreboard()
 
     def game_loop(self):
 
