@@ -1,17 +1,23 @@
+import os
+import sys
+
 import pygame
 import pygame_gui
+
 import game
-import game_over
+import snekdb
 
 
 class StartScreen(object):
     def __init__(self, width, height, score):
+        pygame.init()
         pygame.font.init()
 
         self.width = width
         self.height = height
 
-        self.manager = pygame_gui.UIManager((350, 350), 'button_theme.json')
+        self.manager = pygame_gui.UIManager(
+            (350, 350), 'data/button_theme.json')
 
         self.font = pygame.font.SysFont("Comic Sans MS", 22)
 
@@ -27,6 +33,8 @@ class StartScreen(object):
         self.running = True
 
         self.score = score
+
+        self.db = snekdb.SnekDB()
 
     def draw(self):
         self.start_window.fill((0, 0, 0))
@@ -48,12 +56,12 @@ class StartScreen(object):
                             self.running == False
                             pygame.quit()
                         elif event.ui_element == self.play_button:
-                            game_window = game.GameWindow(self.width, self.height, "Snake")
+                            game_window = game.GameWindow(
+                                self.width, self.height, "Snake")
                             game_window.game_loop()
                             self.running = False
                         elif event.ui_element == self.test_button:
-                            over_screen = game_over.GameOver(5)
-                            over_screen.game_loop()
+                            self.db.get_scoreboard()
                             self.running = False
 
             self.manager.update(time_delta)

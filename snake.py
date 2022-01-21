@@ -68,7 +68,7 @@ class Snake(pygame.sprite.Sprite):
 
     # Adds a piece to the snake
     def snake_grow(self):
-        
+
         self.snake_pieces.insert(0, self.next_snake_growth_piece())
 
     def reset_snake(self):

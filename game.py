@@ -1,7 +1,12 @@
+
+import os
+import sys
+
 import pygame
+
+import apple
 import game_over
 import snake
-import apple
 import snekdb
 
 

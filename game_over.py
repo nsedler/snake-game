@@ -1,8 +1,10 @@
+import string
+
 import pygame
 import pygame_gui
-import string
-import snekdb
+
 import game
+import snekdb
 
 
 class GameOver(object):
@@ -16,7 +18,8 @@ class GameOver(object):
 
         pygame.font.init()
 
-        self.manager = pygame_gui.UIManager((width, height), 'button_theme.json')
+        self.manager = pygame_gui.UIManager(
+            (width, height), './data/button_theme.json')
 
         self.font = pygame.font.SysFont("Comic Sans MS", 22)
 
@@ -31,7 +34,7 @@ class GameOver(object):
         self.name_text_entry.length_limit = 3
         self.name_text_entry.allowed_characters = string.ascii_uppercase
 
-        self.running = True 
+        self.running = True
 
     def draw(self):
         self.start_window.fill((0, 0, 0))
@@ -55,7 +58,8 @@ class GameOver(object):
                             self.db.cnx.commit()
                             self.db.close_db()
 
-                            game_window = game.GameWindow(self.width, self.height, "Snek")
+                            game_window = game.GameWindow(
+                                self.width, self.height, "Snek")
                             game_window.game_loop()
                             self.running = False
 

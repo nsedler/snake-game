@@ -1,5 +1,6 @@
 import pygame
 import pygame_gui
+
 import snekdb
 
 
@@ -13,17 +14,19 @@ class Leaderboard(object):
 
         pygame.font.init()
 
-        self.manager = pygame_gui.UIManager((width, height), 'button_theme.json')
+        self.manager = pygame_gui.UIManager(
+            (width, height), './data/button_theme.json')
 
         self.font = pygame.font.SysFont("Comic Sans MS", 22)
 
         self.start_window = pygame.display.set_mode((width, height))
         self.clock = pygame.time.Clock()
 
-        self.running = True 
+        self.running = True
 
     def draw(self):
         self.start_window.fill((0, 0, 0))
+        leaderboard_book = self.db.get_scoreboard()
 
     def game_loop(self):
 
