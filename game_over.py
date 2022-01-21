@@ -5,6 +5,7 @@ import pygame_gui
 
 import game
 import snekdb
+import start_screen
 
 
 class GameOver(object):
@@ -27,7 +28,13 @@ class GameOver(object):
         self.clock = pygame.time.Clock()
 
         self.submit_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
-            (100, 250), (75, 25)), text="Submit", manager=self.manager, object_id="#submit_button")
+            (130, 180), (75, 25)), text="Submit", manager=self.manager, object_id="#submit_button")
+
+        self.skip_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
+            (130, 205), (75, 25)), text="Skip", manager=self.manager, object_id="#skip_button")
+
+        self.home_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
+            (130, 230), (75, 25)), text="Home", manager=self.manager, object_id="#home_button")
 
         self.name_text_entry = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.rect.Rect(
             (180, 120), (100, 30)), manager=self.manager)
@@ -62,6 +69,14 @@ class GameOver(object):
                                 self.width, self.height, "Snek")
                             game_window.game_loop()
                             self.running = False
+                        elif event.ui_element == self.skip_button:
+                            game_window = game.GameWindow(
+                                self.width, self.height, "Snek")
+                            game_window.game_loop()
+                            self.running = False
+                        elif event.ui_element == self.home_button:
+                            screen = start_screen.StartScreen(350, 350)
+                            screen.game_loop()
 
             self.manager.update(time_delta)
             self.draw()
