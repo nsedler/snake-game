@@ -30,7 +30,7 @@ class GameOver(object):
             (100, 250), (75, 25)), text="Submit", manager=self.manager, object_id="#submit_button")
 
         self.name_text_entry = pygame_gui.elements.UITextEntryLine(relative_rect=pygame.rect.Rect(
-            (180, 120), (100, 22)), manager=self.manager)
+            (180, 120), (100, 30)), manager=self.manager)
         self.name_text_entry.length_limit = 3
         self.name_text_entry.allowed_characters = string.ascii_uppercase
 
