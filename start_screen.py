@@ -1,10 +1,8 @@
-import os
-import sys
-
 import pygame
 import pygame_gui
 
 import game
+import leaderboard
 import snekdb
 
 
@@ -26,9 +24,9 @@ class StartScreen(object):
         self.play_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
             (140, 150), (75, 25)), text="Play", manager=self.manager, object_id="#play_button")
         self.exit_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
-            (140, 200), (75, 25)), text="Exit", manager=self.manager, object_id="#exit_button")
-        self.test_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
-            (140, 250), (75, 25)), text="test", manager=self.manager, object_id="#exit_button")
+            (140, 250), (75, 25)), text="Exit", manager=self.manager, object_id="#exit_button")
+        self.leaderboard_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
+            (140, 200), (75, 25)), text="Scores", manager=self.manager, object_id="#leaderboard_button")
 
         self.running = True
 
@@ -38,9 +36,6 @@ class StartScreen(object):
 
     def draw(self):
         self.start_window.fill((0, 0, 0))
-        score_surface = self.font.render(
-            str(self.score), False, (248, 240, 227))
-        self.start_window.blit(score_surface, (170, 20))
 
     def game_loop(self):
 
@@ -60,8 +55,9 @@ class StartScreen(object):
                                 self.width, self.height, "Snake")
                             game_window.game_loop()
                             self.running = False
-                        elif event.ui_element == self.test_button:
-                            self.db.get_scoreboard()
+                        elif event.ui_element == self.leaderboard_button:
+                            lb = leaderboard.Leaderboard(350, 350)
+                            lb.game_loop()
                             self.running = False
 
             self.manager.update(time_delta)
