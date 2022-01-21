@@ -7,7 +7,7 @@ import snekdb
 
 
 class StartScreen(object):
-    def __init__(self, width, height, score):
+    def __init__(self, width, height):
         pygame.init()
         pygame.font.init()
 
@@ -29,8 +29,6 @@ class StartScreen(object):
             (140, 200), (75, 25)), text="Scores", manager=self.manager, object_id="#leaderboard_button")
 
         self.running = True
-
-        self.score = score
 
         self.db = snekdb.SnekDB()
 
