@@ -1,13 +1,10 @@
-
-import os
-import sys
-
 import pygame
 
 import apple
 import game_over
 import snake
 import snekdb
+import start_screen
 
 
 class GameWindow(object):
@@ -80,6 +77,8 @@ class GameWindow(object):
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
+                        screen = start_screen.StartScreen(350, 350)
+                        screen.game_loop()
                         self.running = False
                     if event.key == pygame.K_r:
                         self.reset_game()
