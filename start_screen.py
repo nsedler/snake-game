@@ -21,6 +21,7 @@ class StartScreen(object):
 
         self.start_window = pygame.display.set_mode((width, height))
         self.clock = pygame.time.Clock()
+
         self.play_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(
             (140, 150), (75, 25)), text="Play", manager=self.manager, object_id="#play_button")
         self.exit_button = pygame_gui.elements.UIButton(relative_rect=pygame.rect.Rect(

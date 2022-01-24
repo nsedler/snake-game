@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 class SnekDB(object):
     def __init__(self):
 
+        # The database connection information is in a .env file
         load_dotenv()
 
         db_user = os.getenv('DB_USER')
@@ -21,27 +22,26 @@ class SnekDB(object):
         self.cursor = self.cnx.cursor(buffered=True)
 
     def close_db(self):
+        # Close the db
         self.cursor.close()
         self.cnx.close()
 
     def get_scoreboard(self):
+        # Get all score in desc order (Highest -> Lowest)
         select_query = "select * from Scores order by Score desc"
         self.cursor.execute(select_query)
+
+        # fetch all rows returned
         data = self.cursor.fetchall()
 
+        # stole this bit of fancy slicing
         leaderboard_split = [data[i:i + 5] for i in range(0, len(data), 5)]
         leaderboard_book = []
 
+        # Make a new dictionary object for each page
         for i in range(0, len(leaderboard_split)):
             new_page = {i + 1: leaderboard_split[i]}
             leaderboard_book.append(new_page)
-        # pp = pprint.PrettyPrinter(depth=4)
-        # pp.pprint(leaderboard_book[1])
-
-        # cur_book_page = leaderboard_book[1][2]
-        # for scoreid, score, name in cur_book_page:
-        #     print(f'{score}___{name}')
-        #     print("______________")
 
         self.cnx.commit()
         self.close_db()

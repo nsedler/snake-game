@@ -1,5 +1,6 @@
-import pygame
 import random
+
+import pygame
 
 
 class Apple(object):
@@ -8,7 +9,6 @@ class Apple(object):
         self.apple = []
 
     # Creates an apple at a random location
-
     def create_apple(self):
 
         # Get the random coords for the apple

@@ -17,25 +17,30 @@ class GameWindow(object):
 
         self.font = pygame.font.SysFont("Comic Sans MS", 22)
 
+        # Get the window, caption and time started
         self.game_window = pygame.display.set_mode((width, height))
         pygame.display.set_caption(title)
         self.clock = pygame.time.Clock()
 
+        # Create our game objects
         self.player = snake.Snake()
         self.food = apple.Apple()
 
         self.running = True
-        self.score = 0
+        self.score = 0  # score default is 0
 
         self.db = snekdb.SnekDB()
 
     def quit_game(self):
-
+        # Creates a new game over screen
         over_screen = game_over.GameOver(self.width, self.height, self.score)
         over_screen.game_loop()
+
+        # Set running to False - ending the game
         self.running = False
 
     def reset_game(self):
+        # Resets game to initial position
         self.score = 0
         self.player.reset_snake()
 
@@ -67,7 +72,7 @@ class GameWindow(object):
     def game_loop(self):
         self.food.create_apple()  # Create the first apple
         while self.running:
-            self.clock.tick(15)  # 15 FPS
+            self.clock.tick(10)  # 15 FPS
 
             for event in pygame.event.get():
                 self.player.on_event(event)
@@ -76,10 +81,14 @@ class GameWindow(object):
                     self.running = False
                     pygame.quit()
                 if event.type == pygame.KEYDOWN:
+
+                    # Escape returns to the starting screen
                     if event.key == pygame.K_ESCAPE:
                         screen = start_screen.StartScreen(350, 350)
                         screen.game_loop()
                         self.running = False
+
+                    # R restarts game
                     if event.key == pygame.K_r:
                         self.reset_game()
 
