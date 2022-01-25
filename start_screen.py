@@ -3,7 +3,6 @@ import pygame_gui
 
 import game
 import leaderboard
-import snekdb
 
 
 class StartScreen(object):
@@ -30,8 +29,6 @@ class StartScreen(object):
             (140, 200), (75, 25)), text="Scores", manager=self.manager, object_id="#leaderboard_button")
 
         self.running = True
-
-        self.db = snekdb.SnekDB()
 
     def draw(self):
         self.start_window.fill((0, 0, 0))
