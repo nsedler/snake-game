@@ -72,7 +72,7 @@ class GameWindow(object):
     def game_loop(self):
         self.food.create_apple()  # Create the first apple
         while self.running:
-            self.clock.tick(10)  # 15 FPS
+            self.clock.tick(12)  # 12 FPS
 
             for event in pygame.event.get():
                 self.player.on_event(event)
