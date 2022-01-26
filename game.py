@@ -27,17 +27,25 @@ class GameWindow(object):
         self.food = apple.Apple()
 
         self.running = True
+        self.online = True
         self.score = 0  # score default is 0
 
-        self.db = snekdb.SnekDB()
+        try:
+            self.db = snekdb.SnekDB()
+        except:
+            self.online = False
 
     def quit_game(self):
         # Creates a new game over screen
-        over_screen = game_over.GameOver(self.width, self.height, self.score)
-        over_screen.game_loop()
+        if self.online:
+            over_screen = game_over.GameOver(
+                self.width, self.height, self.score)
+            over_screen.game_loop()
 
-        # Set running to False - ending the game
-        self.running = False
+            # Set running to False - ending the game
+            self.running = False
+        else:
+            self.reset_game()
 
     def reset_game(self):
         # Resets game to initial position
